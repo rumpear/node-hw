@@ -1,6 +1,7 @@
 const express = require('express');
 const Joi = require('joi');
 const { nanoid } = require('nanoid');
+const contactsController = require('../../controllers/');
 
 const contacts = require('../../models/contacts.js');
 const createError = require('../../utils/createError.js');
@@ -13,29 +14,9 @@ const contactAddEditScheme = Joi.object({
   phone: Joi.string().required(),
 });
 
-router.get('/', async (_, res, next) => {
-  try {
-    const data = await contacts.listContacts();
-    res.status(200).json({ status: 'success', code: 200, data });
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/', contactsController.getAll);
 
-router.get('/:contactId', async (req, res, next) => {
-  try {
-    const { contactId } = req.params;
-    const data = await contacts.getContactById(contactId);
-
-    if (!data) {
-      throw createError(404);
-    }
-
-    res.status(200).json({ status: 'success', code: 200, data });
-  } catch (error) {
-    next(error);
-  }
-});
+router.get('/:contactId', contactsController.getById);
 
 router.post('/', async (req, res, next) => {
   try {
