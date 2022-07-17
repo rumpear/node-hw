@@ -1,5 +1,5 @@
 const {
-  getAllContacts,
+  listContacts,
   getContactById,
   removeContact,
   addContact,
@@ -7,7 +7,7 @@ const {
 } = require('./contacts');
 
 module.exports = {
-  getAllContacts,
+  listContacts,
   getContactById,
   removeContact,
   addContact,
