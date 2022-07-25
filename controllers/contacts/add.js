@@ -1,10 +1,10 @@
+const { joiAddSchema } = require('../../models/contact');
 const services = require('../../services');
 const { createError } = require('../../utils/');
-const { schemas } = require('../../models');
 
 const add = async (req, res, next) => {
   try {
-    const { error } = schemas.add.validate(req.body);
+    const { error } = joiAddSchema.validate(req.body);
     if (error) {
       throw createError(404, error.message);
     }
