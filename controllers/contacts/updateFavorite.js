@@ -1,11 +1,11 @@
 const services = require('../../services');
 const { createError } = require('../../utils/');
-const { schemas } = require('../../models');
+const { joiFavoriteSchema } = require('../../models/contact');
 
 const updateFavorite = async (req, res, next) => {
   try {
     const { contactId } = req.params;
-    const { error } = schemas.favorite.validate(req.body);
+    const { error } = joiFavoriteSchema.validate(req.body);
 
     if (error) {
       throw createError(404, error.message);

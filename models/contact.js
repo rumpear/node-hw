@@ -22,21 +22,17 @@ const contactSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-const addSchema = Joi.object({
+const joiAddSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
   phone: Joi.string().required(),
   favorite: Joi.boolean().required(),
 });
 
-const selectFavoriteSchema = Joi.object({
+const joiFavoriteSchema = Joi.object({
   favorite: Joi.boolean().required(),
 });
 
-const schemas = { add: addSchema, favorite: selectFavoriteSchema };
-
 const Contact = model('contacts', contactSchema);
 
-module.exports = { schemas, Contact };
-
-// E11000 duplicate key error collection: contacts_app.contacts index: email_1 dup key: { email: "roman.f.grusha.com" }
+module.exports = { joiAddSchema, joiFavoriteSchema, Contact };
